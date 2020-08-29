@@ -45,15 +45,17 @@ export default {
             // var _this = this
             this.$refs[form].validate((valid) => {
                 if (valid) {
-                this.axios.post('http://rap2.taobao.org:38080/app/mock/265301/login',this.form)
+                this.service.post('/login',this.form)
                 .then((res) => {
                     if (res.data.status === '200') {
                         this.$message({
-                        message: res.data.msg,
+                        message: '登陆成功',
                         type: 'success'
                         });
                         setTimeout(() => {
                             this.$router.push('/home')
+                            // 登陆的时候把token存起来，再去请求拦截器里设置
+                            localStorage.setItem('token', res.data.data.token)
                         },1000)
                     }else {
                         console.log(res.data.msg)

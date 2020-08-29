@@ -3,41 +3,26 @@
     <el-container>
       <el-header>
         <div class="header-left">
-        <span v-show="!isCollapse">教务系统管理后台</span>
-        <i :class="isCollapse ? 'coll el-icon-s-unfold' : 'coll el-icon-s-fold'" @click="isCollapse = !isCollapse"></i>
+        <span>教务系统管理后台</span>
+        <!-- <i :class="isCollapse ? 'coll el-icon-s-unfold' : 'coll el-icon-s-fold'" @click="isCollapse = !isCollapse"></i> -->
         </div>
         <div>
           退出
         </div>
       </el-header>
       <el-container class="main">
-        <el-aside :width="isCollapse ? '65px' : '200px'">
-          <!-- default-active默认展开 -->
-          <el-menu 
-          router
-          :default-active="activePath" 
-          class="el-menu-vertical-demo" 
-          @open="handleOpen" 
-          @close="handleClose" 
-          :collapse="isCollapse"
-          >
-            <template v-for="(item, index) in menus">
-              <el-submenu :index="item.path" :key="index" v-if="!item.hidden">
-                <template slot="title">
-                  <i class="el-icon-location"></i>
-                  <span slot="title">{{item.name}}</span>
-                </template>
-                <el-menu-item-group v-for="(child,i) in item.children" :key="i">
-                  <el-menu-item :index="child.path">{{child.name}}</el-menu-item>
-                  
-                </el-menu-item-group>
-              </el-submenu>
-            </template>
-          </el-menu>
-        </el-aside>
+        <Menu></Menu>
         <el-main>
+          <el-card>
+            <el-breadcrumb separator-class="el-icon-arrow-right">
+              <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+              <el-breadcrumb-item v-for="(item,i) in $route.matched" :key="i">
+                <strong>{{item.name}}</strong>
+                </el-breadcrumb-item>
+            </el-breadcrumb>
+          </el-card>
           <router-view></router-view>
-          
+          <Footer></Footer>
         </el-main>
       </el-container>
     </el-container>
@@ -45,28 +30,20 @@
 </template>
 
 <script>
+import Menu from './common/Menu'
+import Footer from './common/Footer'
 export default {
   name: 'Home',
+  components:  {
+    Menu,
+    Footer
+  },
   data () {
     return {
-      isCollapse: false,
-      menus:[],
-      activePath: ''
+      
     }
   },
-  created() {
-    // console.log(this.$router.options.routes)
-    this.menus = this.$router.options.routes
-    this.activePath = this.menus[2].children[0].path
-  },
-  methods: {
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath);
-    }
-  }
+  
 }
 </script>
 
@@ -94,21 +71,10 @@ export default {
     bottom: 0px;
     overflow: hidden;
     
-    .el-aside {
-      background-color: #D3DCE6;
-      color: #333;
-      text-align: center;
-      line-height: 200px;
-      .el-menu {
-        height: 100%;
-      }
-    }
-    
     .el-main {
       background-color: #E9EEF3;
       color: #333;
       text-align: center;
-      line-height: 160px;
     }
 
   }

@@ -26,16 +26,19 @@ export default new Router({
       path: '/home',
       name: '学生管理',
       component: Home,
+      iconClass: 'fa fa-list-alt',
       children: [
         { 
           path: '/home/student',
           name: '学生列表',
-          component: StudentList
+          component: StudentList,
+          iconClass: 'fa fa-users',
         },
         { 
           path: '/home/work',
           name: '作业列表',
-          component: WorkList
+          component: WorkList,
+          iconClass: 'fa fa-list',
         }
       ]
     },
