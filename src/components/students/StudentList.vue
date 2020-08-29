@@ -33,6 +33,36 @@
                     </template>
                 </el-table-column>
             </el-table>
+            <!-- 弹窗区域 -->
+            <el-dialog title="修改学生信息" :visible.sync="dialogFormVisible" width="500px">
+                <el-form :model="form">
+                    <el-form-item label="姓名" :label-width="formLabelWidth">
+                        <el-input v-model="form.name" autocomplete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="学号" :label-width="formLabelWidth">
+                        <el-input v-model="form.number" autocomplete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="年龄" :label-width="formLabelWidth">
+                        <el-input v-model="form.age" autocomplete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="性别" :label-width="formLabelWidth">
+                        <el-input v-model="form.sex" autocomplete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="班级" :label-width="formLabelWidth">
+                        <el-input v-model="form.class" autocomplete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="地址" :label-width="formLabelWidth">
+                        <el-input v-model="form.address" autocomplete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="联系方式" :label-width="formLabelWidth">
+                        <el-input v-model="form.tel" autocomplete="off"></el-input>
+                    </el-form-item>
+                </el-form>
+                <div slot="footer" class="dialog-footer">
+                    <el-button @click="dialogFormVisible = false">取 消</el-button>
+                    <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+                </div>
+            </el-dialog>
             <Page></Page>
         </el-card>
     </div>
@@ -47,55 +77,15 @@ export default {
     data(){
         return {
             tableData: [
-                {
-                name: 'wgy',
-                number: '11',
-                age: '11',   
-                sex: '11',
-                class: '11',
-                address: '11',
-                tel: '11'
-                },
-                {
-                name: '11',
-                number: '11',
-                age: '11',   
-                sex: '11',
-                class: '11',
-                address: '11',
-                tel: '11'
-                },
-                {
-                name: '11',
-                number: '11',
-                age: '11',   
-                sex: '11',
-                class: '11',
-                address: '11',
-                tel: '11'
-                },
-                {
-                name: '11',
-                number: '11',
-                age: '11',   
-                sex: '11',
-                class: '11',
-                address: '11',
-                tel: '11'
-                },
-                {
-                name: '11',
-                number: '11',
-                age: '11',   
-                sex: '11',
-                class: '11',
-                address: '11',
-                tel: '11'
-                },
+                
             ],
             formInline: {
                 user: '',
-            }
+            },
+            dialogTableVisible: false,
+            dialogFormVisible: false,
+            form: {},
+            formLabelWidth: '80px'
         }
     },
     created() {
@@ -108,6 +98,9 @@ export default {
     },
     methods: {
         updateInfo(row) {
+            this.dialogFormVisible = true
+            // 把信息传入到修改弹窗
+            this.form = {...row}
             console.log(row)
         },
         onSubmit() {

@@ -7,7 +7,8 @@
         <!-- <i :class="isCollapse ? 'coll el-icon-s-unfold' : 'coll el-icon-s-fold'" @click="isCollapse = !isCollapse"></i> -->
         </div>
         <div>
-          退出
+          {{username}}
+          <span class="login-out" @click="loginOut">退出</span>
         </div>
       </el-header>
       <el-container class="main">
@@ -40,10 +41,24 @@ export default {
   },
   data () {
     return {
-      
+      username: ''
     }
   },
-  
+  methods: {
+    loginOut(){
+      this.$alert('您确定要退出吗？', '退出提示', {
+        confirmButtonText: '确定',
+        callback: action => {
+          // this.$message({
+          //   type: 'info',
+          //   message: `action: ${ action }`
+          // });
+          localStorage.clear()
+          this.$router.push('/login')
+        }
+      });
+    }
+  }
 }
 </script>
 
@@ -61,6 +76,9 @@ export default {
       .coll {
         cursor: pointer;
       }
+    }
+    .login-out {
+        cursor: pointer;
     }
   }
   
