@@ -5,6 +5,8 @@ import Login from '@/components/Login'
 import NotFound from '@/components/NotFound'
 import StudentList from '@/components/students/StudentList'
 import WorkList from '@/components/students/WorkList'
+import DataOverView from '@/components/dataAnalysis/DataOverView'
+import MapData from '@/components/dataAnalysis/MapData'
 
 Vue.use(Router)
 
@@ -40,6 +42,27 @@ export default new Router({
           component: WorkList,
           iconClass: 'fa fa-list',
         }
+      ]
+    },
+    {
+      path: '/home',
+      name: '数据分析',
+      component: Home,
+      iconClass: 'fa fa-bar-chart',
+      children: [
+        { 
+          path: '/home/dataview',
+          name: '数据概览',
+          component: DataOverView,
+          iconClass: 'fa fa-line-chart',
+        },
+        { 
+          path: '/home/mapdata',
+          name: '地图概览',
+          component: MapData,
+          iconClass: 'fa fa-map-marker',
+        },
+
       ]
     },
     {
