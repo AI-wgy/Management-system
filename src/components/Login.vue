@@ -53,7 +53,7 @@ export default {
                         type: 'success'
                         });
                         setTimeout(() => {
-                            this.$router.push('/home')
+                            this.$router.push('/home/student')
                             // 登陆的时候把token存起来，再去请求拦截器里设置
                             localStorage.setItem('token', res.data.data.token)
                         },1000)

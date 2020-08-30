@@ -2,8 +2,8 @@
     <div class="pageing">
         <el-pagination
             background
-            layout="prev, pager, next"
-            :total="1000">
+            layout="prev, pager, next, jumper"
+            :total="57">
         </el-pagination>
     </div>
 </template>
